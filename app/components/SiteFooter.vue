@@ -31,8 +31,8 @@
         {{ $t("footer.fiveMinutes") }}
       </n-p>
       <n-p depth="3">
-        Copyright &copy; 2020 - {{ new Date().getFullYear() }}
-        <n-text depth="3" @click="jumpLink(linkData.home)"> IMSYY </n-text>
+        Copyright &copy; 2026 - {{ new Date().getFullYear() }}
+        <n-text depth="3" @click="jumpLink(linkData.home)"> Skikawa </n-text>
         <n-text
           v-if="siteIcp"
           depth="3"
@@ -50,7 +50,7 @@ const { public: configPublic } = useRuntimeConfig();
 const { siteIcp, version } = configPublic;
 
 const linkData = {
-  github: "https://github.com/imsyy/site-status",
+  github: "https://github.com/skikawa/site-status",
   home: "https://iski.ink",
   email: "mailto:one@skikawa@outlook.com",
 };
