@@ -1,33 +1,5 @@
 English | [简体中文](./README.zh-CN.md)
 
-<div align="center">
-<h1>site-status</h1>
-<p>An online status panel based on UptimeRobot API</p>
-<br />
-<img src="https://img.shields.io/github/last-commit/imsyy/site-status" alt="last commit"/>
-<img src="https://img.shields.io/github/languages/code-size/imsyy/site-status" alt="code size"/>
-<img src="https://img.shields.io/github/stars/imsyy/site-status?style=full" alt="GitHub stars"/>
-<img src="https://img.shields.io/github/forks/imsyy/site-status?style=full&color=orange" alt="GitHub followers"/>
-<br />
-<br />
-<img src="https://s1.ax1x.com/2023/07/20/pCHnLLt.png" alt="demo"/>
-</div>
-
-## 👀 Demo
-
-> Demo password: `123456`
-
-- [IMSYY-Site Monitoring](https://status.imsyy.top/)
-
-## 🎉 Features
-
-- 🌍 Multi-platform deployment support
-- ✨ Elegant and smooth browsing experience
-- 🔐 Supports site password encryption (JWT + Hash)
-- 👀 Overall site status preview
-- ⏲️ Data auto-refresh
-- 📱 Mobile-friendly design
-
 ## Prerequisites
 
 - You need to first add site monitors on [UptimeRobot](https://uptimerobot.com/dashboard) and get the `Read-Only API Key` from the `My Settings` or [API Management](https://dashboard.uptimerobot.com/integrations) page (Do not use the `Main API key`).
@@ -39,7 +11,7 @@ English | [简体中文](./README.zh-CN.md)
 
 This project is deployed by default using [Cloudflare Pages](https://pages.cloudflare.com/).
 
-- `star` and `fork` this project 😘
+- `star` and `fork` the 'project' (from imsyy)
 - You can use the new [NuxtHub](https://hub.nuxt.com/) to quickly deploy this project. If you have experience deploying on Vercel, the process is quite similar. Alternatively, you can use [Cloudflare Pages](https://pages.cloudflare.com/) for deployment.
 - Before moving on, make sure to configure the environment variables as detailed in the `.env.example` file. The `API_KEY` is a required field.
 - If everything goes smoothly, you should be able to see the project’s main page.
