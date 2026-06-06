@@ -16,7 +16,7 @@
     </n-flex>
     <n-flex :size="4" class="text" align="center" vertical>
       <n-p depth="3">
-        <n-text depth="3" @click="jumpLink(linkData.project)">
+        <n-text depth="3" @click="jumpLink(linkData.github)">
           SiteStatus
         </n-text>
         Version {{ version }}
@@ -32,7 +32,7 @@
       </n-p>
       <n-p depth="3">
         Copyright &copy; 2026 - {{ new Date().getFullYear() }}
-        <n-text depth="3" @click="jumpLink(linkData.author)"> IMSYY </n-text>
+        <n-text depth="3" @click="jumpLink(linkData.home)"> iski </n-text>
         <n-text
           v-if="siteIcp"
           depth="3"
@@ -53,8 +53,6 @@ const linkData = {
   github: "https://github.com/skikawa/skiCustomSiteStatus",
   home: "https://iski.ink",
   email: "mailto:skikawa@outlook.com",
-  author: "https://imsyy.top",
-  project: "https://github.com/imsyy/site-status",
 };
 </script>
 
