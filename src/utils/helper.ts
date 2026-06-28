@@ -1,5 +1,62 @@
 import { useStatusStore } from "../store/useStatusStore";
 
+export interface NormalizedSiteData {
+  status: {
+    count: number;
+    ok: number;
+    error: number;
+    unknown: number;
+  };
+  data: any[];
+  timestamp: number;
+}
+
+export const normalizeSitePayload = (payload: any): NormalizedSiteData | null => {
+  if (!payload || typeof payload !== "object") {
+    return null;
+  }
+
+  if (Array.isArray(payload)) {
+    return {
+      status: { count: payload.length, ok: 0, error: 0, unknown: 0 },
+      data: payload,
+      timestamp: Date.now(),
+    };
+  }
+
+  if (Array.isArray(payload?.data) && payload?.status) {
+    return {
+      status: payload.status,
+      data: payload.data,
+      timestamp: payload.timestamp || Date.now(),
+    };
+  }
+
+  if (payload?.data && typeof payload.data === "object" && Array.isArray(payload.data.data)) {
+    return {
+      status: payload.data.status || { count: 0, ok: 0, error: 0, unknown: 0 },
+      data: payload.data.data,
+      timestamp: payload.data.timestamp || Date.now(),
+    };
+  }
+
+  if (payload?.monitors) {
+    const data = Array.isArray(payload.monitors) ? payload.monitors : [];
+    return {
+      status: {
+        count: data.length,
+        ok: 0,
+        error: 0,
+        unknown: 0,
+      },
+      data,
+      timestamp: Date.now(),
+    };
+  }
+
+  return null;
+};
+
 /**
  * Jump to a link in a new tab
  */
@@ -65,12 +122,18 @@ export const getSiteData = async (): Promise<void> => {
       throw new Error(result.message || "Error to get site data");
     }
 
-    const { status } = result.data;
-    store.setSiteData(result.data);
+    const normalized = normalizeSitePayload(result.data);
+    if (!normalized || !Array.isArray(normalized.data)) {
+      throw new Error("The API response did not contain any monitor data.");
+    }
 
-    // Determine overall status
+    const { status } = normalized;
+    store.setSiteData(normalized);
+
     const nextStatus =
-      status.count === status.ok
+      status.count === 0
+        ? "normal"
+        : status.count === status.ok
         ? "normal"
         : status.count === status.error
         ? "error"

@@ -52,7 +52,7 @@ export const SiteCards: React.FC = () => {
     getSiteData();
   };
 
-  const sites = siteData?.data || [];
+  const sites = Array.isArray(siteData?.data) ? siteData.data : [];
 
   if (!siteData && siteStatus !== "unknown") {
     return (
@@ -81,6 +81,21 @@ export const SiteCards: React.FC = () => {
           <Button variant="outlined" color="primary" onClick={handleRetry}>
             重试
           </Button>
+        </Card>
+      </Box>
+    );
+  }
+
+  if (!sites.length) {
+    return (
+      <Box sx={{ maxWidth: 640, margin: "-48px auto 40px", px: 3, position: "relative", zIndex: 2 }}>
+        <Card sx={{ p: 4, textAlign: "center", borderRadius: 2, bgcolor: "#fcfbf8" }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+            暂无可展示的监控站点
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            当前接口返回了空的监控数据，请稍后再试或检查监控配置。
+          </Typography>
         </Card>
       </Box>
     );
