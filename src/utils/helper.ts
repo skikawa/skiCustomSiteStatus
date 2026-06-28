@@ -118,11 +118,11 @@ export const getSiteData = async (): Promise<void> => {
       throw new Error("The API returned an invalid response format.");
     }
 
-    if (result.code !== 200 || !result.data) {
+    if (result.code !== 200) {
       throw new Error(result.message || "Error to get site data");
     }
 
-    const normalized = normalizeSitePayload(result.data);
+    const normalized = normalizeSitePayload(result.data || result);
     if (!normalized || !Array.isArray(normalized.data)) {
       throw new Error("The API response did not contain any monitor data.");
     }
