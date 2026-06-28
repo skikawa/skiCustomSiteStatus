@@ -97,10 +97,21 @@ export async function handleGetMonitors(input: GetMonitorsInput): Promise<Respon
     const apiKey = getEnvValue(env, "API_KEY");
 
     if (!apiKey) {
-      return new Response(JSON.stringify({ code: 500, message: "Missing API_KEY in environment variables" }), {
-        status: 500,
-        headers: { "content-type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          code: 200,
+          message: "No API key configured; returning empty monitor data",
+          data: {
+            status: { count: 0, ok: 0, error: 0, unknown: 0 },
+            data: [],
+            timestamp: Date.now(),
+          },
+        }),
+        {
+          status: 200,
+          headers: { "content-type": "application/json" },
+        }
+      );
     }
 
     const now = Date.now();
