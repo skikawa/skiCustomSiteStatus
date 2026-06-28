@@ -53,6 +53,8 @@ export const SiteCards: React.FC = () => {
   };
 
   const sites = Array.isArray(siteData?.data) ? siteData.data : [];
+  console.log("SiteCards siteData", siteData);
+  console.log("SiteCards sites", sites);
 
   if (!siteData && siteStatus !== "unknown") {
     return (

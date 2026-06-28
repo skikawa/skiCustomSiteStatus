@@ -1,6 +1,5 @@
 import { Hono } from "hono";
-import dayjs from "dayjs";
-import { onRequest as getMonitorsHandler } from "../functions/api/getMonitors";
+import { onRequest as getMonitorsHandler } from "./api/getMonitors";
 
 const app = new Hono().basePath("/api");
 
