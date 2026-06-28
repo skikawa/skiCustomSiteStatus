@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import dayjs from "dayjs";
+import { onRequest as getMonitorsHandler } from "../functions/api/getMonitors";
 
 const app = new Hono().basePath("/api");
 
@@ -17,6 +18,14 @@ const getEnvVal = (key: string): string => {
 };
 
 // Get Monitors (UptimeRobot API Proxy) - Public Access
+app.all("/getMonitors", async (c) => {
+  if (c.req.method !== "POST") {
+    return c.json({ code: 405, message: "Method Not Allowed" }, 405);
+  }
+
+  return getMonitorsHandler({ request: c.req.raw, env: process.env, context: c });
+});
+
 app.post("/getMonitors", async (c) => {
   try {
     const apiUrl = getEnvVal("API_URL") || "https://api.uptimerobot.com/v2/";

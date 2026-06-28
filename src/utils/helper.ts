@@ -35,7 +35,7 @@ export const getSiteData = async (): Promise<void> => {
   const store = useStatusStore.getState();
   try {
     store.setSiteStatus("loading");
-    
+
     const response = await fetch("/api/getMonitors", {
       method: "POST",
       headers: {
@@ -43,20 +43,31 @@ export const getSiteData = async (): Promise<void> => {
       },
     });
 
-    if (response.status === 401) {
-      store.setLoginStatus(false);
-      store.setSiteStatus("unknown");
-      return;
+    if (!response.ok) {
+      let message = `Request failed with status ${response.status}`;
+      try {
+        const errorPayload = await response.json();
+        message = errorPayload?.message || message;
+      } catch {
+        // Ignore JSON parse failures and keep the fallback message.
+      }
+      throw new Error(message);
     }
 
-    const result = await response.json();
+    let result: any;
+    try {
+      result = await response.json();
+    } catch {
+      throw new Error("The API returned an invalid response format.");
+    }
+
     if (result.code !== 200 || !result.data) {
       throw new Error(result.message || "Error to get site data");
     }
 
     const { status } = result.data;
     store.setSiteData(result.data);
-    
+
     // Determine overall status
     const nextStatus =
       status.count === status.ok
@@ -64,7 +75,7 @@ export const getSiteData = async (): Promise<void> => {
         : status.count === status.error
         ? "error"
         : "warn";
-        
+
     store.setSiteStatus(nextStatus);
   } catch (error) {
     console.error("error to get site data", error);

@@ -6,7 +6,7 @@
 
 ## 部署
 
-本项目基于 React + Vite + MUI 构建，前端代码位于 `src` 目录，生产构建输出到 `dist` 目录。
+本项目基于 React + Vite + MUI 构建，前端构建输出到 `dist` 目录，监控接口则通过 `/api/getMonitors` 以平台原生方式暴露。
 
 ### 本地开发
 
@@ -15,11 +15,30 @@
 - 使用 `npm run build` 进行生产构建
 - 使用 `npm run preview` 预览构建结果
 
-### 部署到托管平台
+### Cloudflare Pages
 
-- 在部署前配置好环境变量，尤其是 `API_KEY`
-- 将构建后的 `dist` 目录部署到 [Cloudflare Pages](https://pages.cloudflare.com/)、[Vercel](https://vercel.com/)、[Netlify](https://www.netlify.com/) 或其他静态托管平台
-- 如需本地运行接口服务，可使用 `npm run start`
+- 构建命令：`npm run build`
+- 输出目录：`dist`
+- 在项目中添加 API 函数文件：`api/getMonitors.ts`
+- 在 Cloudflare Pages 的环境变量中配置：
+  - `API_KEY`（必填）
+  - `API_URL`（可选，默认 `https://api.uptimerobot.com/v2/`）
+  - `COUNT_DAYS`（可选，默认 `60`）
+  - `SHOW_LINK`（可选，默认 `true`）
+  - `SITE_PASSWORD` 和 `SITE_SECRET_KEY`（可选，用于站点加密）
+
+### Vercel
+
+- 构建命令：`npm run build`
+- 输出目录：`dist`
+- 在项目中添加 API Routes 文件：`api/getMonitors.ts`
+- 在 Vercel 项目设置的 Environment Variables 中配置同样的环境变量
+- 正常部署后，接口会在 `/api/getMonitors` 提供服务
+
+### 说明
+
+- 前端会直接访问 `/api/getMonitors`，因此部署平台必须在生产环境中正确暴露该接口。
+- 如需本地运行接口服务，可使用 `npm run start`。
 
 ## Q & A
 
