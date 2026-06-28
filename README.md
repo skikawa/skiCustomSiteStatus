@@ -7,32 +7,20 @@ English | [简体中文](./README.zh-CN.md)
 
 ## Deployment
 
-### Cloudflare
+This project is a React + Vite + MUI application. The frontend is built from the files in the `src` directory, and the production build is generated into the `dist` folder.
 
-This project is deployed by default using [Cloudflare Pages](https://pages.cloudflare.com/).
+### Local Development
 
-- `star` and `fork` the 'project' (from imsyy)
-- You can use the new [NuxtHub](https://hub.nuxt.com/) to quickly deploy this project. If you have experience deploying on Vercel, the process is quite similar. Alternatively, you can use [Cloudflare Pages](https://pages.cloudflare.com/) for deployment.
-- Before moving on, make sure to configure the environment variables as detailed in the `.env.example` file. The `API_KEY` is a required field.
-- If everything goes smoothly, you should be able to see the project’s main page.
+- Install dependencies with `npm install`
+- Start the dev server with `npm run dev`
+- Build for production with `npm run build`
+- Preview the production build with `npm run preview`
 
-### Vercel
+### Hosting
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/imsyy/site-status)
-
-- Click the button above to deploy.
-- Add the following environment variables (important):
-
-  | **Variable Name**   | **Value** |
-  | ------------------- | --------- |
-  | DEPLOYMENT_PLATFORM | auto      |
-  | API_KEY             |           |
-
-- All set!
-
-### Other Hosting Platforms
-
-For deployment guides, refer to the official documentation: [Deploying Nuxt Apps](https://nuxtjs.org.cn/deploy)
+- Configure the required environment variables before deployment, especially `API_KEY`
+- Deploy the generated `dist` directory to [Cloudflare Pages](https://pages.cloudflare.com/), [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), or another static hosting platform
+- If you also want to run the API server locally, use `npm run start`
 
 ## Q & A
 

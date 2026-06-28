@@ -6,32 +6,20 @@
 
 ## 部署
 
-### Cloudflare
+本项目基于 React + Vite + MUI 构建，前端代码位于 `src` 目录，生产构建输出到 `dist` 目录。
 
-本项目默认使用 [Cloudflare Pages](https://pages.cloudflare.com/) 来行部署
+### 本地开发
 
-- `star` 并 `fork` imsyy大佬的原项目
-- 可以使用全新的 [NuxtHub](https://hub.nuxt.com/) 来快捷的部署本项目，如果您有在 Vercel 上部署项目的经历，那么过程是大致相同的，当然，也可以使用 [Cloudflare Pages](https://pages.cloudflare.com/) 来部署
-- 在点击下一步之前请先配置好环境变量，具体内容请参考 `.env.example` 文件中的内容，其中 `API_KEY` 为必填项
-- 若进展顺利，你就可看到项目主页面了
+- 使用 `npm install` 安装依赖
+- 使用 `npm run dev` 启动开发服务器
+- 使用 `npm run build` 进行生产构建
+- 使用 `npm run preview` 预览构建结果
 
-### Vercel
+### 部署到托管平台
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/imsyy/site-status)
-
-- 点击上方按钮以前往部署
-- 在环境变量中添加下方的内容（ 重要 ）
-
-  | **变量名称**        | **值** |
-  | ------------------- | ------ |
-  | DEPLOYMENT_PLATFORM | auto   |
-  | API_KEY             |        |
-
-- 大功告成
-
-### 其他托管平台
-
-请参考官方文档：[部署 Nuxt 应用](https://nuxtjs.org.cn/deploy)
+- 在部署前配置好环境变量，尤其是 `API_KEY`
+- 将构建后的 `dist` 目录部署到 [Cloudflare Pages](https://pages.cloudflare.com/)、[Vercel](https://vercel.com/)、[Netlify](https://www.netlify.com/) 或其他静态托管平台
+- 如需本地运行接口服务，可使用 `npm run start`
 
 ## Q & A
 
